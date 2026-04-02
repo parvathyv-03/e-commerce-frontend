@@ -1,0 +1,137 @@
+[
+    {
+        "id":1,
+        "name":"Men Casual Shirt",
+        "price":899,
+        "category":"men",
+        "image":"https://images.pexels.com/photos/17901262/pexels-photo-17901262.jpeg",
+        "description":"Comfortable cotton casual shirt"
+    },
+    {
+        "id":2,
+        "name":"Crop Top",
+        "price":499,
+        "category":"women",
+        "image":"https://i.pinimg.com/474x/e6/8f/21/e68f21fc98fbe107d85f551893774148.jpg",
+        "description":"Lightweight cotton wear"
+    },
+    {
+        "id":3,
+        "name":"Casual Shirt",
+        "price":1299,
+        "category":"men",
+        "image":"https://i.pinimg.com/736x/06/28/92/06289292d5d76440700a39df3ad60bee.jpg",
+        "description":"Stylish and comfortable shirt"
+    },
+    {
+        "id":4,
+        "name":"Printed Casual Shirt",
+        "price":999,
+        "category":"men",
+        "image":"https://images.pexels.com/photos/17901275/pexels-photo-17901275.jpeg",
+        "description":"Black stylish shirt with print"
+    },
+    {
+        "id":5,
+        "name":"Casual Blue shirt",
+        "price":1399,
+        "category":"men",
+        "image":"https://images.pexels.com/photos/17901287/pexels-photo-17901287.jpeg",
+        "description":"Comfortable and stylish blue shirt"
+    },
+    {
+        "id":6,
+        "name":"Full Sleeve Top",
+        "price":699,
+        "category":"women",
+        "image":"https://i.pinimg.com/236x/16/92/29/1692297af45384fcfd5979978bb7c506.jpg",
+        "description":"Stylish and comfortable"
+    },
+    {
+        "id":7,
+        "name":"Casual Top",
+        "price":799,
+        "category":"women",
+        "image":"https://i.pinimg.com/474x/0d/75/89/0d75892f359dc463340df9a8d184e0a0.jpg",
+        "description":"Casual pink top"
+    },
+    {
+        "id":8,
+        "name":"Denim Top",
+        "price":899,
+        "category":"women",
+        "image":"https://i.pinimg.com/474x/b2/cd/6f/b2cd6fecb25b2c6bf3a6106a5f0fc55b.jpg",
+        "description":"Stylish denim top"
+    },
+    {
+        "id":9,
+        "name":"Denim sneakers",
+        "price":1599,
+        "category":"footwear",
+        "image":"https://images.pexels.com/photos/26902739/pexels-photo-26902739.jpeg",
+        "description":"Stylish sneakers"
+    },
+    {
+        "id":10,
+        "name":"Puma Sneakers ",
+        "price":1599,
+        "category":"footwear",
+        "image":"https://i.pinimg.com/236x/b3/bc/72/b3bc72d79f7ede15fad9eb29b7ca1768.jpg",
+        "description":"Comfortable Sneakers"
+
+    },
+    {
+        "id":11,
+        "name":"Adidas Sneakers",
+        "price":1599,
+        "category":"footwear",
+        "image":"https://i.pinimg.com/474x/ae/07/fc/ae07fc5925083ffb2f2a8af9e0d811c1.jpg",
+        "description":"Stylish sneakers"
+
+    },
+    {
+        "id":12,
+        "name":"White Sneakers",
+        "price":1599,
+        "category":"footwear",
+        "image":"https://images.pexels.com/photos/27204251/pexels-photo-27204251.jpeg",
+        "description":"Comfortable sneakers"
+    },
+    {
+        "id":"13",
+        "name":"Creations",
+        "price":"151",
+        "category":"jewellery",
+        "image":"https://images.pexels.com/photos/12145316/pexels-photo-12145316.jpeg",
+        "description":"Elegant gold pendant necklace"
+    },
+   
+    {
+        "id":"14",
+        "name":"Groww",
+        "price":"160",
+        "category":"jewellery",
+        "image":"https://images.pexels.com/photos/32075816/pexels-photo-32075816.jpeg",
+        "description":"Anti tarnish waterproof necklace"
+    },
+   
+    {
+        "id":"15",
+        "name":"Common",
+        "price":"184",
+        "category":"jewellery",
+        "image":"https://images.pexels.com/photos/15856345/pexels-photo-15856345.jpeg",
+        "description":"Elegent gold plated alloy pendant"
+    },
+   
+    {
+        "id":"16",
+        "name":"Minimal",
+        "price":"219",
+        "category":"jewellery",
+        "image":"https://images.pexels.com/photos/27357183/pexels-photo-27357183.jpeg",
+        "description":"Elegant pendant necklace"
+    }
+   
+    
+]
