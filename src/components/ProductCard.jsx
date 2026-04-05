@@ -42,7 +42,7 @@ function ProductCard({product}){
                     }
                 dispatch(toggleWishlist(product));
                 }}
-                className={`absolute top-2 right-2 text-xl ${isWishlisted ? "text-red-500" : "text-black-400"}`}
+                className={`absolute top-2 right-2 text-xl ${isWishlisted ? "text-red-500" : "text-black"}`}
                 >
                    ♥ 
                 </button>

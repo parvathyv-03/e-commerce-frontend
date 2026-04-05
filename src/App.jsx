@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import './App.css'
 import MainLayout from './layouts/MainLayout';
+// pages
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Cart from './pages/Cart';
-import { BrowserRouter } from 'react-router-dom';
-import {Routes, Route} from 'react-router-dom';
+
+import { BrowserRouter,Routes, Route } from 'react-router-dom';
+// auth
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+// others
 import Wishlist from './pages/Wishlist';
 import CategoryProducts from './pages/CategoryProducts';
 function App() {
