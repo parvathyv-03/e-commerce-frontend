@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+// restores login after refresh
 const savedAuth = JSON.parse(localStorage.getItem("auth"));
 
 const authSlice =createSlice({

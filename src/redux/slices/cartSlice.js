@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+// restores cart after refresh
 const savedCart = JSON.parse(localStorage.getItem("cart"));
 
 const cartSlice = createSlice({
@@ -15,6 +16,7 @@ const cartSlice = createSlice({
                 item => item.id === product.id
             );
 
+            // check if item already exists
             if(existingItem){
                 existingItem.quantity +=1;
             }else{

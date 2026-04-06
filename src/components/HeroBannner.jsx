@@ -8,6 +8,7 @@ import banner3 from "../assets/banners/banner3.jpg";
 function HeroBanner(){
     const navigate = useNavigate();
 
+    // banner data
     const banners = [
         {
             image : banner1,
@@ -31,8 +32,11 @@ function HeroBanner(){
             category:"footwear"
         }
     ];
+
+    // state (tracks when banner is active)
     const[currentIndex,setCurrentIndex] = useState(0);
 
+    // auto-slide logic
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex(prev => (prev+1) % banners.length);
@@ -44,6 +48,7 @@ function HeroBanner(){
     return(
         <div className="relative w-full h-[70vh] overflow-hidden">
 
+            {/* sliding effect(moves images horizontally,smooth transition) */}
             <div className="flex h-full transition-transform duration-700 ease-in-out"
             style={{transform:`translateX(-${currentIndex * 100}%)`}}>
 
@@ -55,7 +60,7 @@ function HeroBanner(){
             </div>
 
             
-
+            {/* tailwind css used for ui */}
             <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-start px-16">
                 <h1 className="text-white text-4xl md:text-5xl font-bold mb-4"> 
                     {banners[currentIndex].title}
@@ -65,6 +70,7 @@ function HeroBanner(){
                     {banners[currentIndex].subtitle}
                 </p>
 
+                {/* This is how category page is triggered */}
                 <button onClick={() => navigate(`/products/${banners[currentIndex].category}`)} 
                     className="bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-md font-semibold transition">
                     {banners[currentIndex].button}

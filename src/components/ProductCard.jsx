@@ -5,15 +5,18 @@ import { setPendingCartItem } from "../redux/slices/authSlice";
 import { toggleWishlist } from "../redux/slices/wishlistSlice";
 
 function ProductCard({product}){
+    // redux
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const wishlistItems = useSelector(state => state.wishlist.items);
 
+    // checks if product is already in wishlist
     const isWishlisted = wishlistItems.some(
         item => item.id === product.id
     );
 
+    // Add to Cart
     const handleAddToCart = () => {
         if (!isLoggedIn){
             dispatch(setPendingCartItem(product));
@@ -26,11 +29,12 @@ function ProductCard({product}){
     return(
         <div className="border rounded-lg shadow-sm p-4 hover:shadow-md transition">
             <div className="relative w-full h-60 bg-gray-200 rounded ">
-                <img src={product.image} 
+                <img src={`http://127.0.0.1:8000${product.image}`} 
                     alt={product.name} 
                     className="w-full h-full object-cover rounded"
                 />
 
+                {/* wishlist */}
                 <button onClick={() => {
                     if (!isLoggedIn){
                         localStorage.setItem(

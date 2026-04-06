@@ -1,10 +1,14 @@
+// navigation without page reload
 import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/attire-logo.png";
+// reads data from redux store and send actions to redux
 import { useSelector,useDispatch } from "react-redux";
+// Functions that modify state
 import { logout } from "../redux/slices/authSlice";
 import { clearCart } from "../redux/slices/cartSlice";
 import { clearWishlist } from "../redux/slices/wishlistSlice";
-import { useNavigate } from "react-router-dom";
+
 
 function Navbar(){
 
@@ -46,7 +50,7 @@ function Navbar(){
                             Wishlist
                         </Link>
                     </li>
-                    
+                    {/* Conditional Rendering */}
                     <li>
                         {isLoggedIn ? (
                             <button 
