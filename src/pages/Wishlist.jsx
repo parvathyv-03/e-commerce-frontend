@@ -13,7 +13,7 @@ function Wishlist(){
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map(item => (
             <div key={item.id} className="border rounded-lg p-4 shadow-sm">
-                <img src={item.image} alt={item.name} className="w-full h-48 object-cover rounded"/>
+                <img src={`http://127.0.0.1:8000${item.image}`} alt={item.name} className="w-full h-48 object-cover rounded"/>
                 <h2 className="mt3 font-semibold text-lg">{item.name}</h2>
 
                 <p className="text-sm text-gray-600">{item.description}</p>

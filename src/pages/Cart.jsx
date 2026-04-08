@@ -19,7 +19,7 @@ const cartTotal = cartItems.reduce(
                     {cartItems.map((item) =>(
                         <div key={item.id} className="border p-4 rounded flex justify-between">
                         <div className="flex items-center gap-4 border p-4 rounded-lg shadow-sm">
-                            <img src={item.image} alt={item.image} className="w-20 h-20 object-cover rounded"/>
+                            <img src={`http://127.0.0.1:8000${item.image}`} alt={item.image} className="w-20 h-20 object-cover rounded"/>
                         </div>
                             <div className="flex-1 flex flex-col justify-center gap-2 p-3 max-w-md">
                                 <h2 className="font-semibold leading-tight">{item.name}</h2>

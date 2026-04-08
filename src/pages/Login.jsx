@@ -1,9 +1,12 @@
-import React from 'react'
 import { useDispatch,useSelector } from 'react-redux';
 import { login,clearPendingCartItem } from '../redux/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../redux/slices/cartSlice';
 import { toggleWishlist } from '../redux/slices/wishlistSlice';
+
+// After backend authentication
+import {useState} from "react";
+import axios from "axios";
 
 function Login() {
 
@@ -15,23 +18,49 @@ function Login() {
         localStorage.getItem("pendingWishlistItem")
     );
 
-    const handleLogin = () => {
-       
-        dispatch(login({name:"Demo User"}));
+    // add state for inputs
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+    
+    // Main part
+    const handleLogin = async () => {
+        try{
+            const res = await axios.post(
+                "http://127.0.0.1:8000/api/login/",
+                {
+                    username,
+                    password
+                }
+            );
 
-        // pending cart
-        if(pendingItem){
-            dispatch(addToCart(pendingItem));
-            dispatch(clearPendingCartItem());
-        }
+            // Store JWT Token
+            localStorage.setItem("token",res.data.access);
 
-        // pending wishlist
-        if(pendingWishlistItem){
-            dispatch(toggleWishlist(pendingWishlistItem));
-            localStorage.removeItem("pendingWishlistItem");
-        }
+            // Update Redux
+            dispatch(login({
+                isLoggedIn:true,
+                user: username,
+                token : res.data.access
+            }));
 
-        navigate("/products");
+            //restore pending cart
+            if(pendingItem){
+                dispatch(addToCart(pendingItem));
+                dispatch(clearPendingCartItem());
+            }
+
+            // pending wishlist
+            if(pendingWishlistItem){
+                dispatch(toggleWishlist(pendingWishlistItem));
+                localStorage.removeItem("pendingWishlistItem");
+            }
+
+            navigate("/products");
+
+        } catch (err){
+            console.log(err.response?.data);
+            alert("Invalid username or password");
+        }       
     };
 
   return (
@@ -39,8 +68,17 @@ function Login() {
         <div className='w-full max-w-md p-6 border rounded'>
             <h2 className='text-2xl font-bold mb-4 text-center'>Login</h2>
 
-            <input type='email' placeholder='Email' className='w-full border p-2 mb-3 rounded'/>
-            <input type='password' placeholder='Password' className='w-full border p-2 mb-4 rounded'/>
+            <input type='text' 
+                placeholder='Username' 
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                className='w-full border p-2 mb-3 rounded'/>
+
+            <input type='password' 
+                placeholder='Password' 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                className='w-full border p-2 mb-4 rounded'/>
 
             <button onClick={handleLogin} className='w-full bg-blue-600 text-white py-2 rounded'>
                 Login

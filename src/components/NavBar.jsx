@@ -50,31 +50,29 @@ function Navbar(){
                             Wishlist
                         </Link>
                     </li>
-                    {/* Conditional Rendering */}
-                    <li>
-                        {isLoggedIn ? (
-                            <button 
-                            onClick={handleLogout}
-                            className="text-red-600 hover:text-red-700">
+
+                    {!isLoggedIn ? (
+                        <>
+                            <li>
+                                <Link to='/login' className="hover:text-blue-600">
+                                    Login                                
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/signup" className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+                                    Signup
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <li>
+                            <button
+                                onClick={handleLogout}
+                                className="text-red-600 hover:text-red-700">
                                 Logout
                             </button>
-                        ) : (
-                            <Link to="/login" className="hover:text-blue-600">
-                                Login
-                            </Link>
-                        )}
-                    </li>
-                    {/* <li>
-                        <Link to="/login" className="px-3 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">
-                            Login
-                        </Link>
-                    </li>  */}
-
-                    <li>
-                        <Link to="/signup" className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
-                            Signup
-                        </Link>    
-                    </li>     
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>
