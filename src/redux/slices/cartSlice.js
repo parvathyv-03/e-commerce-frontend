@@ -1,71 +1,67 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice,createAsyncThunk} from "@reduxjs/toolkit";
+import axios from "axios";
 
-// restores cart after refresh
-const savedCart = JSON.parse(localStorage.getItem("cart"));
+const API_URL = "http://127.0.0.1:8000/api/cart/"
+
+// GET CART
+export const fetchCart = createAsyncThunk(
+    "cart/fetchCart",
+    async() => {
+        const response = await axios.get(API_URL);
+        return response.data;
+    }
+);
+
+// POST ADD/INCREASE
+export const addToCart = createAsyncThunk(
+    "cart/addToCart",
+    async(productId)=>{
+        console.log("SENDING:",productId)
+
+        await axios.post(API_URL,{product_id:productId});
+
+        // IMPORTANT: REFETCH CART AFTER UPDATE
+        const response = await axios.get(API_URL);
+        return response.data;
+    }
+);
+
+export const removeFromCart = createAsyncThunk(
+    "cart/removeFromCart",
+    async(productId) => {
+        await axios.delete(API_URL,{
+            data:{product_id:productId},
+        });
+
+        const response = await axios.get(API_URL);
+        return response.data;
+    }
+)
 
 const cartSlice = createSlice({
     name:"cart",
     initialState:{
-        items:savedCart || []
+        items : [],
+        loading:false,
     },
-    reducers:{
-        addToCart(state,action){
-            const product = action.payload;
+    reducers:{},
 
-            const existingItem = state.items.find(
-                item => item.id === product.id
-            );
-
-            // check if item already exists
-            if(existingItem){
-                existingItem.quantity +=1;
-            }else{
-                state.items.push({...product,quantity: 1});
-            }
-
-            localStorage.setItem("cart",JSON.stringify(state.items));
-        },
-
-        increaseQuantity(state,action){
-            const item = state.items.find(
-                item => item.id === action.payload
-            );
-
-            if(item){
-                item.quantity += 1;
-                localStorage.setItem("cart",JSON.stringify(state.items));
-            }
-        },
-
-        decreaseQuantity(state,action){
-            const item = state.items.find(
-                item => item.id === action.payload
-            );
-
-            if(item.quantity > 1){
-                item.quantity -= 1
-            }else{
-                state.items = state.items.filter(
-                    item => item.id !== action.payload
-                );
-            }
-
-            localStorage.setItem("cart",JSON.stringify(state.items));
-        },
-
-        removeFromCart(state,action){
-            state.items = state.items.filter(
-                item => item.id !== action.payload
-            );
-            localStorage.setItem("cart",JSON.stringify(state.items));
-        },
-
-        clearCart(state){
-            state.items=[];
-            localStorage.removeItem("cart");
-        }
-    }
+    extraReducers:(builder) => {
+        builder
+            .addCase(fetchCart.pending,(state) =>{
+                state.loading = true;
+            })
+            .addCase(fetchCart.fulfilled,(state,action)=>{
+                state.items=action.payload;
+                state.loading=false;
+            })
+            .addCase(addToCart.fulfilled,(state,action)=>{
+                state.items=action.payload;
+            })
+            .addCase(removeFromCart.fulfilled,(state,action)=>{
+                state.items = action.payload;
+            });
+    },
 });
 
-export const{addToCart,increaseQuantity,decreaseQuantity,removeFromCart,clearCart} = cartSlice.actions;
 export default cartSlice.reducer;

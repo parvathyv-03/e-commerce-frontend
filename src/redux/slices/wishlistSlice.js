@@ -1,33 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+const API_URL = "http://127.0.0.1:8000/api/wishlist/";
+
+// GET WISHLIST
+export const fetchWishlist = createAsyncThunk(
+    "wishlist/fetchWishlist",
+    async() => {
+        const response = await axios.get(API_URL);
+        return response.data;
+    }
+);
+
+// POST TOGGLE
+export const toggleWishlist = createAsyncThunk(
+    "wishlist/toggleWishlist",
+    async(productId) =>{
+        console.log("SENDING:",productId);
+
+        await axios.post(API_URL,{product_id:productId});
+
+        const response = await axios.get(API_URL);
+        return response.data;
+    }
+);
 
 const wishlistSlice = createSlice({
     name:"wishlist",
     initialState:{
-        items: savedWishlist 
+        items: [], 
     },
-    reducers:{
-        toggleWishlist(state,action){
-            const product = action.payload;
+    reducers:{},
 
-            const exists = state.items.find(item => item.id === product.id);
-
-            if(exists){
-                state.items = state.items.filter(item => item.id !== product.id);
-            } else {
-                state.items.push(product);
-            }
-
-            localStorage.setItem("wishlist",JSON.stringify(state.items));
-        },
-
-        clearWishlist(state){
-            state.items = [];
-            localStorage.removeItem("wishlist");
-        }
-    }
+    extraReducers:(builder) => {
+        builder
+            .addCase(fetchWishlist.fulfilled,(state,action)=>{
+                state.items = action.payload;
+            })
+            .addCase(toggleWishlist.fulfilled,(state,action)=>{
+                state.items = action.payload;
+            });
+    },
 });
 
-export const {toggleWishlist,clearWishlist} = wishlistSlice.actions;
 export default wishlistSlice.reducer;

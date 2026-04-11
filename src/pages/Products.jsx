@@ -16,7 +16,7 @@ const categories = [
     {
         name:"Footwear",
         slug:"footwear",
-        image:"src/assets/categories/category-footwear.jpg"
+        image:"/src/assets/categories/category-footwear.jpg"
     },
     {
         name:"Jewellery",
@@ -43,9 +43,9 @@ function Products(){
                     alt={cat.name}
                     className="opacity-75 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"/>
 
-                    <div className="absolute inser-0 bg-black/50 group-hover:bg-black/60 transition"/>
+                    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition pointer-events none"/>
 
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-black">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white pointer-events-none">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-wide">
                             {cat.name}
                         </h2>

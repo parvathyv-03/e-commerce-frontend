@@ -5,7 +5,7 @@ import { addToCart } from '../redux/slices/cartSlice';
 import { toggleWishlist } from '../redux/slices/wishlistSlice';
 
 // After backend authentication
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import axios from "axios";
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const pendingItem = useSelector(state => state.auth.pendingCartItem)
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
     const pendingWishlistItem = JSON.parse(
         localStorage.getItem("pendingWishlistItem")
@@ -21,6 +22,12 @@ function Login() {
     // add state for inputs
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
+
+    useEffect(() => {
+        if (isLoggedIn){
+            navigate("/products");
+        }
+    },[isLoggedIn,navigate]);
     
     // Main part
     const handleLogin = async () => {
@@ -34,7 +41,11 @@ function Login() {
             );
 
             // Store JWT Token
-            localStorage.setItem("token",res.data.access);
+            localStorage.setItem("access",res.data.access);
+            localStorage.setItem("refresh",res.data.refresh);
+
+            // set axios header
+            axios.defaults.headers.common["Authorization"]=`Bearer ${res.data.access}`;
 
             // Update Redux
             dispatch(login({
@@ -53,9 +64,7 @@ function Login() {
             if(pendingWishlistItem){
                 dispatch(toggleWishlist(pendingWishlistItem));
                 localStorage.removeItem("pendingWishlistItem");
-            }
-
-            navigate("/products");
+            }          
 
         } catch (err){
             console.log(err.response?.data);

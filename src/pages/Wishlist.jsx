@@ -20,7 +20,7 @@ function Wishlist(){
 
                 <p className="mt-2 font-bold text-blue-600">Rs. {item.price}</p>
 
-                <button onClick={() => dispatch(toggleWishlist(item))}
+                <button onClick={() => dispatch(toggleWishlist(item.id))}
                     className="mt-3 text-red-600 hover:text-red-700">
                         Remove
                 </button>

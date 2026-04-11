@@ -13,9 +13,21 @@ import Signup from './pages/Signup';
 // others
 import Wishlist from './pages/Wishlist';
 import CategoryProducts from './pages/CategoryProducts';
+
+// for getting token
+import { useEffect } from 'react';
+import axios from 'axios';
+
 function App() {
   // const [count, setCount] = useState(0)
 
+  useEffect(() =>{
+    const access = localStorage.getItem("access");
+
+    if (access){
+      axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
+    }
+  },[]);
   return (
     <BrowserRouter>
       <Routes>
