@@ -22,7 +22,7 @@ function ProductCard({product}){
             dispatch(setPendingCartItem(product));
             navigate("/login");
         } else{
-            dispatch(addToCart(product));
+            dispatch(addToCart(product.id));
         }
     };
     
@@ -44,7 +44,7 @@ function ProductCard({product}){
                         navigate("/login");
                         return;
                     }
-                dispatch(toggleWishlist(product));
+                dispatch(toggleWishlist(product.id));
                 }}
                 className={`absolute top-2 right-2 text-xl ${isWishlisted ? "text-red-500" : "text-black"}`}
                 >
