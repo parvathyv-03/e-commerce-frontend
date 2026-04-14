@@ -2,6 +2,7 @@ import products from "../data/products.json";
 import ProductCard from "../components/ProductCard";
 import {Link} from "react-router-dom";
 
+
 const categories = [
     {
         name:"For Him",
@@ -23,6 +24,31 @@ const categories = [
         slug:"jewellery",
         image:"src/assets/categories/category-jewellery.jpg"
     },
+    {
+        name : "Watches For Men",
+        slug : "watchesmen",
+        image : "src/assets/categories/category-watchesmen.jpg"
+    },
+    {
+        name : "Watches For Women",
+        slug : "watcheswomen",
+        image : "src/assets/categories/category-watcheswomen.jpg"
+    },
+    {
+        name :"Beauty and Makeup",
+        slug : "beautyandmakeup",
+        image : "src/assets/categories/category-beautyandmakeup.jpg"
+    },
+    {
+        name : "HandBags",
+        slug: "handbags",
+        image:"src/assets/categories/category-handbags.jpg"
+    },
+    {
+        name : "Eyewear",
+        slug : "eyewear",
+        image:"src/assets/categories/category-eyewear.jpg"
+    }
 ]
 
 function Products(){
@@ -43,7 +69,7 @@ function Products(){
                     alt={cat.name}
                     className="opacity-75 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"/>
 
-                    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition pointer-events none"/>
+                    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition pointer-events-none"/>
 
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white pointer-events-none">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-wide">
