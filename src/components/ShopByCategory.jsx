@@ -14,6 +14,13 @@ import watcheswomen from "../assets/home-category/watcheswomen.jpg"
 
 import { useNavigate } from "react-router-dom";
 
+const categorySlugMap = {
+    "watches for men": "watchesmen",
+    "watches for women": "watcheswomen",
+    "beauty and makeup": "beautyandmakeup",
+    "handbags": "handbags",
+};
+
 const imageMap = {
     footwear,
     men,
@@ -47,7 +54,7 @@ const ShopByCategory = () => {
             <div className="grid grid-cols-3 gap-5  mx-auto px-4">
                 {categories.map((cat) => (
                     <div key={cat.id}
-                        onClick={() => navigate(`/products/${cat.name.toLowerCase()}`)} 
+                        onClick={() =>  navigate(`/products/${categorySlugMap[cat.name.toLowerCase()]}`)} 
                         className="cursor-pointer rounded-xl overflow-hidden bg-gray-100 shadow hover:scale-105 transition duration-300">
 
                         <img src={imageMap[cat.name.toLowerCase()]} 
