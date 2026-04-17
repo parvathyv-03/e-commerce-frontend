@@ -54,7 +54,13 @@ const ShopByCategory = () => {
             <div className="grid grid-cols-3 gap-5  mx-auto px-4">
                 {categories.map((cat) => (
                     <div key={cat.id}
-                        onClick={() =>  navigate(`/products/${categorySlugMap[cat.name.toLowerCase()]}`)} 
+                        onClick={() =>  {
+                            const name = cat.name.toLowerCase().trim();
+
+                            const slug = categorySlugMap[name] || name;
+
+                            navigate(`/products/${slug}`);
+                        }} 
                         className="cursor-pointer rounded-xl overflow-hidden bg-gray-100 shadow hover:scale-105 transition duration-300">
 
                         <img src={imageMap[cat.name.toLowerCase()]} 
