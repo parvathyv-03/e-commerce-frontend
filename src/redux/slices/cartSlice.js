@@ -1,13 +1,13 @@
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../../utils/api";
 
-const API_URL = "http://127.0.0.1:8000/api/cart/"
+const API_URL = "/cart/";
 
 // GET CART
 export const fetchCart = createAsyncThunk(
     "cart/fetchCart",
     async() => {
-        const response = await axios.get(API_URL);
+        const response = await api.get(API_URL);
         return response.data;
     }
 );
@@ -18,10 +18,10 @@ export const addToCart = createAsyncThunk(
     async(productId)=>{
         console.log("SENDING:",productId)
 
-        await axios.post(API_URL,{product_id:productId});
+        await api.post(API_URL,{product_id:productId});
 
         // IMPORTANT: REFETCH CART AFTER UPDATE
-        const response = await axios.get(API_URL);
+        const response = await api.get(API_URL);
         return response.data;
     }
 );
@@ -29,11 +29,11 @@ export const addToCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
     "cart/removeFromCart",
     async(productId) => {
-        await axios.delete(API_URL,{
+        await api.delete(API_URL,{
             data:{product_id:productId},
         });
 
-        const response = await axios.get(API_URL);
+        const response = await api.get(API_URL);
         return response.data;
     }
 )

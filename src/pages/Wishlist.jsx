@@ -1,9 +1,21 @@
+import {useEffect} from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { toggleWishlist } from "../redux/slices/wishlistSlice";
+import { fetchWishlist, toggleWishlist } from "../redux/slices/wishlistSlice";
 
 function Wishlist(){
     const items = useSelector(state => state.wishlist.items);
     const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    useEffect(() => {
+        if(isLoggedIn){
+            dispatch(fetchWishlist());
+        }
+    },[dispatch,isLoggedIn]);
+
+    if(!isLoggedIn){
+        return <p className="text-center text-xl font-bold mt-10">Please login to view your wishlist.</p>
+    }
 
     if (items.length == 0){
         return<p className="text-center text-xl font-bold mt-10">Wishlist is empty</p>

@@ -4,12 +4,15 @@ import { useEffect } from "react";
     
 function Cart(){
 const cartItems = useSelector((state) => state.cart.items);
+const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 const dispatch = useDispatch();
 
 // fetch cart from backend when component loads
 useEffect(() => {
-    dispatch(fetchCart());
-},[dispatch]);
+    if(isLoggedIn){
+        dispatch(fetchCart());
+    }
+},[dispatch,isLoggedIn]);
 
 // calculate total 
 const cartTotal = cartItems.reduce(
@@ -20,7 +23,9 @@ const cartTotal = cartItems.reduce(
         <div >
             <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
-            {cartItems.length === 0 ? (
+            {!isLoggedIn ? (
+                <p>Please login to view your Cart.</p>
+            ) : cartItems.length === 0 ? (
                 <p>Your cart is empty</p>
             ) : (
                 <div className="space-y-4">

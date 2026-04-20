@@ -6,7 +6,7 @@ import { toggleWishlist } from '../redux/slices/wishlistSlice';
 
 // After backend authentication
 import {useState,useEffect} from "react";
-import axios from "axios";
+import api from "../utils/api";
 
 function Login() {
 
@@ -32,8 +32,8 @@ function Login() {
     // Main part
     const handleLogin = async () => {
         try{
-            const res = await axios.post(
-                "http://127.0.0.1:8000/api/login/",
+            const res = await api.post(
+                "/login/",
                 {
                     username,
                     password

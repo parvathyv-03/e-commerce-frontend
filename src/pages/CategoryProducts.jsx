@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect,useState } from "react";
-import axios from "axios";
-// import products from "../data/products.json";
+import api from "../utils/api";
 import ProductCard from "../components/ProductCard";
+
+import { useNavigate } from "react-router-dom";
 
 const categoryDisplayNames = {
     watchesmen: "Watches for Men",
@@ -14,24 +15,19 @@ const categoryDisplayNames = {
 function CategoryProducts(){
     const {category} = useParams();
     const[products,setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios 
-            .get(`http://127.0.0.1:8000/api/products/?category=${category}`,
-                {
-                    headers:{
-                        Authorization : undefined
-                    }
-                }
-            )
-            .then((res) => setProducts(res.data))
+        console.log(category);
+
+        api
+            .get(`/products/?category=${category}`)
+            .then((res) => {
+                console.log(res.data);
+                setProducts(res.data)
+            })
             .catch((err) => console.log(err));
     }, [category]);
-
-
-    // const filteredProducts = products.filter(
-    //     (product) => product.category === category
-    // );
 
     return(
         <div className="px-6 pt-10">
@@ -42,7 +38,13 @@ function CategoryProducts(){
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {products.length > 0 ?(
                     products.map((product) => (
-                        <ProductCard key={product.id} product={product}/>
+                        // <div
+                        //     key={product.id}
+                        //     onClick={() => navigate(`/products/${category}/${product.slug}`)}
+                        //     className="cursor-pointer">
+                                <ProductCard key={product.id} product={product}/>
+                        // </div>
+
                     ))
                 ) : (
                     <p className="col-span-full text-center text-gray-500">
@@ -51,21 +53,6 @@ function CategoryProducts(){
                 )}
             </div>
         </div>
-
-
-        // <div className="products-page">
-        //     <h2>{category.toUpperCase()}</h2>
-
-        //     <div className="products-grid">
-        //          {filteredProducts.length > 0 ?(
-        //             filteredProducts.map((product) => (
-        //                 <ProductCard key={product.id} product={product}/>
-        //             ))
-        //          ) : (
-        //             <p>No products found</p>
-        //          )}
-        //     </div>
-        // </div>
     )
 }
 

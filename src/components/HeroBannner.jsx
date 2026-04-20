@@ -43,7 +43,7 @@ function HeroBanner(){
         },3000);
 
         return () => clearInterval(interval);
-    },[]);
+    },[banners.length]);
 
     return(
         <div className="relative w-full h-[70vh] overflow-hidden">

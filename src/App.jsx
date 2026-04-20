@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import MainLayout from './layouts/MainLayout';
 // pages
@@ -13,21 +12,24 @@ import Signup from './pages/Signup';
 // others
 import Wishlist from './pages/Wishlist';
 import CategoryProducts from './pages/CategoryProducts';
+// import { useEffect } from 'react';
 
-// for getting token
-import { useEffect } from 'react';
-import axios from 'axios';
+// // for getting token
+// import { useEffect } from 'react';
+// import axios from 'axios';
+
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
-  // const [count, setCount] = useState(0)
+//   // const [count, setCount] = useState(0)
 
-  useEffect(() =>{
-    const access = localStorage.getItem("access");
+//   useEffect(() =>{
+//     const access = localStorage.getItem("access");
 
-    if (access){
-      axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
-    }
-  },[]);
+  //   if (access){
+  //     axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
+  //   }
+  // },[]);
   return (
     <BrowserRouter>
       <Routes>
@@ -39,10 +41,10 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
+          <Route path="/products/:category/:slug" element={<ProductDetail />}/>
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;
