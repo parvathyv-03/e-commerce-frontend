@@ -20,7 +20,7 @@ export const toggleWishlist = createAsyncThunk(
 
         await api.post(API_URL,{product_id:productId});
 
-        const response = await axios.get(API_URL);
+        const response = await api.get(API_URL);
         return response.data;
     }
 );
@@ -30,7 +30,11 @@ const wishlistSlice = createSlice({
     initialState:{
         items: [], 
     },
-    reducers:{},
+    reducers:{
+        clearWishlist:(state)=>{
+            state.items = [];
+        }
+    },
 
     extraReducers:(builder) => {
         builder
@@ -43,4 +47,5 @@ const wishlistSlice = createSlice({
     },
 });
 
+export const {clearWishlist} = wishlistSlice.actions;
 export default wishlistSlice.reducer;

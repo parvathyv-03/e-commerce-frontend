@@ -56,13 +56,13 @@ function Login() {
 
             //restore pending cart
             if(pendingItem){
-                dispatch(addToCart(pendingItem));
+                dispatch(addToCart(pendingItem.id));
                 dispatch(clearPendingCartItem());
             }
 
             // pending wishlist
             if(pendingWishlistItem){
-                dispatch(toggleWishlist(pendingWishlistItem));
+                dispatch(toggleWishlist(pendingWishlistItem.id));
                 localStorage.removeItem("pendingWishlistItem");
             }          
 

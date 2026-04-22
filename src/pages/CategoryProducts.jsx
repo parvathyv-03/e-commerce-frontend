@@ -39,12 +39,12 @@ function CategoryProducts(){
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {products.length > 0 ?(
                     products.map((product) => (
-                        // <div
-                        //     key={product.id}
-                        //     onClick={() => navigate(`/products/${category}/${product.slug}`)}
-                        //     className="cursor-pointer">
-                                <ProductCard key={product.id} product={product}/>
-                        // </div>
+                        <div
+                            key={product.id}
+                            onClick={() => navigate(`/products/${category}/${product.slug}`)}
+                            className="cursor-pointer">
+                                <ProductCard product={product}/>
+                        </div>
 
                     ))
                 ) : (

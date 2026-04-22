@@ -35,7 +35,9 @@ function ProductCard({product}){
                 />
 
                 {/* wishlist */}
-                <button onClick={() => {
+                <button onClick={(e) => {
+                    e.stopPropagation();
+
                     if (!isLoggedIn){
                         localStorage.setItem(
                             "pendingWishlistItem",
@@ -44,7 +46,7 @@ function ProductCard({product}){
                         navigate("/login");
                         return;
                     }
-                dispatch(toggleWishlist(product.id));
+                    dispatch(toggleWishlist(product.id));
                 }}
                 className={`absolute top-2 right-2 text-xl ${isWishlisted ? "text-red-500" : "text-black"}`}
                 >
@@ -69,7 +71,10 @@ function ProductCard({product}){
 
                 
 
-                <button onClick={handleAddToCart} 
+                <button onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart();
+                }} 
                 className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
                     Add to Cart
                 </button>

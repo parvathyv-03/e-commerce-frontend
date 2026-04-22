@@ -2,9 +2,26 @@ import { useParams } from "react-router-dom";
 import { useEffect,useState } from "react";
 import {api} from "../utils/api.js"
 
+import { useDispatch,useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../redux/slices/cartSlice.js";
+import { setPendingCartItem } from "../redux/slices/authSlice.js";
+
 function ProductDetail(){
     const {slug} = useParams();
     const[product,setProduct] = useState(null);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    const handleAddToCart = () => {
+        if(!isLoggedIn){
+            dispatch(setPendingCartItem(product));
+            navigate("/login");
+        }else{
+            dispatch(addToCart(product.id));
+        }
+    }
 
     useEffect(() => {
         api.get(`products/${slug}/`)
@@ -38,7 +55,7 @@ function ProductDetail(){
                     </p>
 
                     <div className="flex gap-4 mt-6 justify-center">
-                        <button className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800">
+                        <button onClick={handleAddToCart} className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800">
                                 Add to Cart
                         </button>
 

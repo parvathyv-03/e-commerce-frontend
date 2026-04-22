@@ -6,8 +6,8 @@ import logo from "../assets/attire-logo.png";
 import { useSelector,useDispatch } from "react-redux";
 // Functions that modify state
 import { logout } from "../redux/slices/authSlice";
-// import { clearCart } from "../redux/slices/cartSlice";
-// import { clearWishlist } from "../redux/slices/wishlistSlice";
+import { clearCart } from "../redux/slices/cartSlice";
+import { clearWishlist } from "../redux/slices/wishlistSlice";
 
 
 function Navbar(){
@@ -18,8 +18,8 @@ function Navbar(){
 
     const handleLogout = () => {
         dispatch(logout());
-        // dispatch(clearCart());
-        // dispatch(clearWishlist());
+        dispatch(clearCart());
+        dispatch(clearWishlist());
         navigate("/");
     };
 
