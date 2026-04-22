@@ -45,7 +45,7 @@ function Login() {
             localStorage.setItem("refresh",res.data.refresh);
 
             // set axios header
-            axios.defaults.headers.common["Authorization"]=`Bearer ${res.data.access}`;
+            api.defaults.headers.common["Authorization"]=`Bearer ${res.data.access}`;
 
             // Update Redux
             dispatch(login({

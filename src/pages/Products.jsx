@@ -19,6 +19,20 @@ function normalizeCategory(name){
     return name.toLowerCase().trim();
 }
 
+function getCategorySlug(name){
+     const normalized = name.toLowerCase().trim();
+
+     const slugMap = {
+        "watches for men" : "watchesmen",
+        "watches for women" : "watcheswomen",
+        "beauty and makeup" : "beautyandmakeup",
+     };
+
+     return slugMap[normalized] || normalized.replace(/\s+/g,"");
+}
+
+
+
 function Products(){
 
     const [categories,setCategories] = useState([]);
@@ -46,7 +60,7 @@ function Products(){
                     return (
                         <Link
                         key={cat.id}
-                        to={`/products/${cat.slug}`}
+                        to={`/products/${getCategorySlug(cat.name)}`}
                         className="group relative h-64 md:h-80 w-full overflow-hidden rounded-2xl category-card">
                         
                             <img 

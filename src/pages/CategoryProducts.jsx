@@ -17,6 +17,7 @@ function CategoryProducts(){
     const[products,setProducts] = useState([]);
     const navigate = useNavigate();
 
+    console.log(category)
     useEffect(() => {
         console.log(category);
 
