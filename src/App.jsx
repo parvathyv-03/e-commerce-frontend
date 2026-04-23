@@ -19,6 +19,7 @@ import CategoryProducts from './pages/CategoryProducts';
 // import axios from 'axios';
 
 import ProductDetail from './pages/ProductDetail';
+import Checkout from './pages/Checkout';
 
 function App() {
 //   // const [count, setCount] = useState(0)
@@ -42,6 +43,7 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
           <Route path="/products/:category/:slug" element={<ProductDetail />}/>
+          <Route path="/checkout" element={<Checkout/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

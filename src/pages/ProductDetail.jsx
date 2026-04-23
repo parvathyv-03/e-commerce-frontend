@@ -23,6 +23,14 @@ function ProductDetail(){
         }
     }
 
+    const handleBuyNow = () => {
+        navigate("/checkout",{
+            state:{
+                product : product
+            }
+        });
+    };
+
     useEffect(() => {
         api.get(`products/${slug}/`)
             .then((res) => setProduct(res.data))
@@ -60,6 +68,7 @@ function ProductDetail(){
                         </button>
 
                         <button
+                            onClick={handleBuyNow}
                             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
                                 Buy Now
                         </button>

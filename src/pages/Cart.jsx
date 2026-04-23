@@ -1,11 +1,22 @@
 import {useDispatch,useSelector} from "react-redux";
 import { fetchCart,addToCart,removeFromCart } from "../redux/slices/cartSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
     
 function Cart(){
 const cartItems = useSelector((state) => state.cart.items);
 const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 const dispatch = useDispatch();
+const navigate = useNavigate();
+
+const handleCheckout = () => {
+    navigate("/checkout",{
+        state:{
+            cartItems: cartItems
+        }
+    });
+};
+
 
 // fetch cart from backend when component loads
 useEffect(() => {
@@ -67,8 +78,14 @@ const cartTotal = cartItems.reduce(
                             </div>
                         </div>
                     ))}
-                    <div className="max-w-3xl mx-auto p-4 px-3 py-1 border rounded">
-                                    <h2>Grand Total : Rs.{cartTotal}</h2>
+                    <div className="max-w-3xl mx-auto p-4 border rounded flex items-center justify-between gap-4">
+                                    <button
+                                        onClick={handleCheckout}
+                                        className="bg-black text-white px-6 py-3 rounded-lg"
+                                    >
+                                        Buy Now
+                                    </button>
+                                    <h2 className=" py-3 px-4 text-white bg-blue-600 rounded-lg">GRAND TOTAL : Rs.{cartTotal}</h2>
                     </div>
                 </div>
             )}
