@@ -24,11 +24,19 @@ function ProductDetail(){
     }
 
     const handleBuyNow = () => {
+        const token = localStorage.getItem("access");
+
+        if(!token){
+            navigate("/login");
+            return;
+        }
+
         navigate("/checkout",{
             state:{
-                product : product
+                product: product
             }
         });
+
     };
 
     useEffect(() => {
