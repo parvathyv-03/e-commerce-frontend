@@ -21,6 +21,8 @@ import CategoryProducts from './pages/CategoryProducts';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 
+import OrderSuccess from './pages/OrderSuccess';
+
 function App() {
 //   // const [count, setCount] = useState(0)
 
@@ -44,6 +46,7 @@ function App() {
           <Route path='/wishlist' element={<Wishlist/>}/>
           <Route path="/products/:category/:slug" element={<ProductDetail />}/>
           <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/order-success" element={<OrderSuccess/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
