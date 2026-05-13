@@ -116,10 +116,7 @@ Features:
 
 This project is built for learning purposes to practice real-world full-stack e-commerce development concepts.
 
-### Author
 
-Parvathy V <br>
-Python Fullstack Learner
 
 
 
