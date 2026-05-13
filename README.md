@@ -1,16 +1,126 @@
-# React + Vite
+# E-Commerce Fashion Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern full-stack fashion e-commerce frontend built using React.js, Tailwind CSS, Redux Toolkit, and React Router. This project provides a complete shopping experience including authentication,  wishlist, cart management, checkout , Razorpay payment integration, and viewing orders.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- User Authentication (Login & Signup)
+- Product Categories
+- Product Detail Page
+- Wishlist Functionality
+- Add to Cart
+- Quantity Update
+- Checkout System
+- Razorpay Payment Integration
+- Order Success Page
+- Orders History Page
+- Responsive UI Design
+- Redux State Management
+- Dynamic Routing using React Router
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+- React.js
+- Tailwind CSS
+- Redux Toolkit
+- React Router DOM
+- Axios
+- React Icons
+
+### Backend (Connected API)
+
+- Django
+- Django REST Framework
+- SQLite
+
+## Project Structure
+
+```
+src/
+|
+|--- assets/
+|    |--- banners/
+|    |--- categories/
+|    |---home-category/
+|    |---screenshots/
+|--- components/
+|    |--- Footer.jsx
+|    |--- HeroBanner.jsx
+|    |--- NavBar.jsx
+|    |--- ProductCard.jsx
+|    |--- ShopByCategory.jsx
+|--- data/
+|    |--- products.json
+|--- layouts/
+|    |--- MainLayout.jsx
+|--- pages/
+|    |---Cart.jsx
+|    |--- CategoryProducts.jsx
+|    |--- Checkout.jsx
+|    |--- Home.jsx
+|    |--- Login.jsx
+|    |--- Orders.jsx
+|    |--- OrderSuccess.jsx
+|    |--- ProductDetail.jsx
+|    |--- Products.jsx
+|    |--- Signup.jsx
+|    |--- Wishlist.jsx
+|--- redux/
+|    |--- slices/
+|         |--- authSlice.js
+|         |--- cartSlice.js
+|         |--- wishlistSlice.js
+|    |--- store.js
+|--- utils
+|    |--- api.js
+|    |--- localStorage.js
+|--- App.css
+|--- App.jsx
+|--- index.css
+|--- main.jsx
+|--- App.jsx
+
+```
+## Payment Integration
+This project uses Razorpay Test Mode for payment integration.
+
+Features:
+
+- Razorpay Checkout Popup
+- Test Payment Flow
+- Order Creation After Successful Payment
+
+## Core Functionalities
+
+### Cart System
+- Add products to cart
+- Remove items from cart
+- Quantity management
+
+### Wishlist System
+- Add/remove products from wishlist
+- Persistent wishlist state
+
+### Orders System
+- Place orders after successful payment
+- View previous orders
+- Order status tracking
+
+## Note
+
+This project is built for learning purposes to practice real-world full-stack e-commerce development concepts.
+
+### Author
+
+Parvathy V <br>
+Python Fullstack Learner
+
+
+
+
