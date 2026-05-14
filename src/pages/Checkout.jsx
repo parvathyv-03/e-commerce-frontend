@@ -5,7 +5,7 @@ import api from "../utils/api";
 function Checkout(){
     const location = useLocation();
     const navigate = useNavigate();
-    const product = location.state?.product;
+    const {product,quantity} = location.state || {};
     const cartItems = location.state?.cartItems;
 
 
@@ -28,25 +28,70 @@ function Checkout(){
     };
 
     const handleSubmit = async () => {
-        try {
-            const payload = {
-                ...formData,
-                total_amount:totalAmount,
-                product_id:product.id,
-            };
 
-            await api.post("/checkout/",payload);
-
-            alert("Order placed successfully");
-            navigate("/");
-        }catch(err){
-            console.log(err);
+        if(
+            !formData.full_name ||
+            !formData.email ||
+            !formData.phone ||
+            !formData.address ||
+            !formData.city ||
+            !formData.state ||
+            !formData.pincode 
+        ) {
+            alert("Please fill all checkout details");
+            return;
         }
-    }
+
+        const options = {
+            key: import.meta.env.VITE_RAZORPAY_KEY,
+            amount:totalAmount * 100,
+            currency: "INR",
+            name:"ATTIRE",
+            DESCRIPTION: "Order Payment",
+            handler: async function(response){
+                try {
+                    const payload = {
+                        ...formData,
+                        total_amount:totalAmount,
+                        product:product.id,
+
+                        quantity: quantity,
+                        payment_status:"Paid",
+                        order_status:"Placed",
+
+                        razorpay_payment_id:
+                            response.razorpay_payment_id
+                    };
+
+                    await api.post("/checkout/",payload);
+
+                    alert("Order placed successfully");
+                    navigate("/order-success");
+                }catch(err){
+                    console.log(err.response.data);
+                }
+            },
+
+            prefill:{
+                name:formData.full_name,
+                email:formData.email,
+                contact:formData.phone
+            },
+
+            theme:{
+                color:"#000000"
+            }
+        };
+
+        const razorpay = new window.Razorpay(options);
+
+        razorpay.open();
+
+    };
 
     let totalAmount = 0;
         if(product){
-            totalAmount = Number(product.price);
+            totalAmount = Number(product.price) * quantity;
         }
 
         if(cartItems && cartItems.length > 0){
@@ -132,6 +177,10 @@ function Checkout(){
 
                             <p className="text-gray-600">
                                 Rs.{product.price}
+                            </p>
+
+                            <p className="text-gray-600">
+                                Quantity:{quantity}
                             </p>
                         </div>
 

@@ -50,6 +50,11 @@ function Navbar(){
                             Wishlist
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/orders"className="hover:text-blue-600">
+                            Orders
+                        </Link>
+                    </li>
 
                     {!isLoggedIn ? (
                         <>

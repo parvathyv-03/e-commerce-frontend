@@ -22,6 +22,8 @@ import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 
 import OrderSuccess from './pages/OrderSuccess';
+import Footer from "./components/Footer";
+import Orders from "./pages/Orders";
 
 function App() {
 //   // const [count, setCount] = useState(0)
@@ -47,8 +49,10 @@ function App() {
           <Route path="/products/:category/:slug" element={<ProductDetail />}/>
           <Route path="/checkout" element={<Checkout/>}/>
           <Route path="/order-success" element={<OrderSuccess/>}/>
+          <Route path='/orders' element={<Orders/>}/>
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
