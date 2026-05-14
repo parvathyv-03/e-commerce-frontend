@@ -87,6 +87,42 @@ src/
 |--- App.jsx
 
 ```
+### Screenshots
+
+- Homepage
+
+  ![Homepage](./src/assets/screenshots/Home.png)
+
+- Products
+
+  ![Products1](./src/assets/screenshots/Products-1.png)
+
+- Product Detail
+
+  ![ProductDetail](./src/assets/screenshots/ProductDetail.png)
+
+- Wishlist
+
+  ![Wishlist](./src/assets/screenshots/Wishlist.png)
+
+- Cart
+
+  ![Cart](./src/assets/screenshots/Cart.png)
+
+- Checkout
+
+  ![Checkout](./src/assets/screenshots/Checkout.png)
+  
+- Orders
+
+  ![Orders](./src/assets/screenshots/Orders.png)
+ 
+
+
+
+
+
+
 ## Payment Integration
 This project uses Razorpay Test Mode for payment integration.
 
