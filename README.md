@@ -39,6 +39,21 @@ A modern full-stack fashion e-commerce frontend built using React.js, Tailwind C
 - Django REST Framework
 - SQLite
 
+## Core Functionalities
+
+### Cart System
+- Add products to cart
+- Remove items from cart
+- Quantity management
+
+### Wishlist System
+- Add/remove products from wishlist
+- Persistent wishlist state
+
+### Orders System
+- Place orders after successful payment
+- View previous orders
+
 ## Project Structure
 
 ```
@@ -132,21 +147,6 @@ Features:
 - Test Payment Flow
 - Order Creation After Successful Payment
 
-## Core Functionalities
-
-### Cart System
-- Add products to cart
-- Remove items from cart
-- Quantity management
-
-### Wishlist System
-- Add/remove products from wishlist
-- Persistent wishlist state
-
-### Orders System
-- Place orders after successful payment
-- View previous orders
-- Order status tracking
 
 ## Note
 
