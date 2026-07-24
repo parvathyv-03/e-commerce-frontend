@@ -25,6 +25,8 @@ dist-ssr
 
 
 .env
+env
+env (2)
 
 # avoiding photos in assets
 src/assets/home-categories/*.jpg
