@@ -1,10 +1,13 @@
 import {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/slices/cartSlice";
 import api from "../utils/api";
 
 function Checkout(){
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {product,quantity} = location.state || {};
     const cartItems = location.state?.cartItems;
 
@@ -47,28 +50,41 @@ function Checkout(){
             amount:totalAmount * 100,
             currency: "INR",
             name:"ATTIRE",
-            DESCRIPTION: "Order Payment",
+            description: "Order Payment",
             handler: async function(response){
                 try {
-                    const payload = {
-                        ...formData,
-                        total_amount:totalAmount,
-                        product:product.id,
-
-                        quantity: quantity,
-                        payment_status:"Paid",
-                        order_status:"Placed",
-
-                        razorpay_payment_id:
-                            response.razorpay_payment_id
-                    };
-
-                    await api.post("/checkout/",payload);
+                    if (cartItems && cartItems.length > 0) {
+                        const payload = cartItems.map(item => ({
+                            ...formData,
+                            total_amount: Number(item.price) * item.quantity,
+                            product: item.id,
+                            quantity: item.quantity,
+                            payment_method: "Razorpay",
+                            payment_status: "Paid",
+                            order_status: "Placed",
+                            razorpay_payment_id: response.razorpay_payment_id
+                        }));
+                        await api.post("/checkout/", payload);
+                        await api.delete("/cart/");
+                        dispatch(clearCart());
+                    } else {
+                        const payload = {
+                            ...formData,
+                            total_amount: totalAmount,
+                            product: product.id,
+                            quantity: quantity,
+                            payment_method: "Razorpay",
+                            payment_status: "Paid",
+                            order_status: "Placed",
+                            razorpay_payment_id: response.razorpay_payment_id
+                        };
+                        await api.post("/checkout/", payload);
+                    }
 
                     alert("Order placed successfully");
                     navigate("/order-success");
                 }catch(err){
-                    console.log(err.response.data);
+                    console.log(err.response?.data || err.message);
                 }
             },
 
@@ -90,19 +106,17 @@ function Checkout(){
     };
 
     let totalAmount = 0;
-        if(product){
-            totalAmount = Number(product.price) * quantity;
-        }
-
-        if(cartItems && cartItems.length > 0){
-            totalAmount = cartItems.reduce(
-                (sum,item) => sum + Number(item.price),
-                0
-            );
-        }
+    if(product){
+        totalAmount = Number(product.price) * quantity;
+    } else if(cartItems && cartItems.length > 0){
+        totalAmount = cartItems.reduce(
+            (sum,item) => sum + Number(item.price) * item.quantity,
+            0
+        );
+    }
 
     return (
-        <div className="max=w=5xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto px-6 py-10">
             <h1 className="text-3xl font-bold mb-8">Checkout Page</h1>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -160,7 +174,7 @@ function Checkout(){
 
                 {/* RIGHTSIDE */}
                 <div className="border rounded-lg p-6 shadow h-fit">
-                    <h2 className="text-xl font-bol mb-6">
+                    <h2 className="text-xl font-bold mb-6">
                         Order Summary
                     </h2>
 
